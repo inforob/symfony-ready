@@ -21,5 +21,6 @@ RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 COPY ./vhost/template /etc/apache2/sites-available
 COPY ./vhost/vhost.conf /opt/docker/etc/httpd/vhost.conf
 COPY ./shell/script.sh /opt/script.sh
+COPY ./composer/composer.json /opt/composer.json
 
 WORKDIR /var/www/projects

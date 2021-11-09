@@ -85,6 +85,9 @@ if [ ! -d "$docroot" ]; then
    	composer create-project symfony/skeleton $docroot
 	log_error="$docroot/var/log/apache_error.log"
 	root="$docroot/public"
+	cp /opt/composer.json $docroot
+	cd $docroot 
+	composer update 
 fi
 
 echo -e "\nCreating the new $name Virtual Host with DocumentRoot: $root"
