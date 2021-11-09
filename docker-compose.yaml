@@ -1,0 +1,30 @@
+version: '3.4'
+services:
+  webserver:
+    build:
+      args:
+        email: 'application@sunmediatv.com'
+        user: 'application'
+      context: webserver
+      dockerfile: Dockerfile
+    container_name: phpunit_webserver
+    volumes:
+      - ./www/:/var/www/projects/
+    environment:
+      PHP_DATE_TIMEZONE: 'Europe/Madrid'
+      XDEBUG_MODE : 'develop,debug,coverage'
+      XDEBUG_START_WITH_REQUEST : 'yes'
+    ports:
+      - "80:80"
+      - "443:443"
+      - "9001:9001"
+    networks:
+      network:
+        ipv4_address: 173.16.4.1
+
+
+networks:
+  network:
+    ipam:
+      config:
+        - subnet: 173.16.4.0/16
