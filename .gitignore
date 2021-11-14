@@ -1,2 +1,11 @@
+###> jetbrais ###
 .idea/
+###< jetbrains ###
+
+###> projects ###
 www/
+###< projects ###
+
+###> docker mysql volume ###
+.mysql-data/
+###< jetbrains ###
