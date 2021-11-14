@@ -7,7 +7,7 @@ services:
         user: 'application'
       context: webserver
       dockerfile: Dockerfile
-    container_name: phpunit_webserver
+    container_name: webserver
     volumes:
       - ./www/:/var/www/projects/
     environment:
