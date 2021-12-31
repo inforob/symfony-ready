@@ -7,7 +7,7 @@ services:
         user: 'application'
       context: webserver
       dockerfile: Dockerfile
-    container_name: webserver
+    container_name: webserver_cas
     volumes:
       - ./www/:/var/www/projects/
     environment:
@@ -24,7 +24,7 @@ services:
       network:
         ipv4_address: 173.16.4.1
   database:
-    container_name: database
+    container_name: database_cas
     image: mysql:8.0
     tty: true
     volumes:

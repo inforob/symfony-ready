@@ -82,12 +82,9 @@ done
 # Check if the docroot exists, if it does not exist then we'll create it.
 if [ ! -d "$docroot" ]; then
 	echo "Creating $docroot project..."
-   	composer create-project symfony/skeleton $docroot
-	log_error="$docroot/var/log/apache_error.log"
-	root="$docroot/public"
-	cp /opt/composer.json $docroot
-	cd $docroot 
-	composer update 
+   	symfony new --dir=$docroot --version=lts
+    log_error="$docroot/var/log/apache_error.log"
+    root="$docroot/public"
 fi
 
 echo -e "\nCreating the new $name Virtual Host with DocumentRoot: $root"
