@@ -13,11 +13,13 @@ fi
 create-project-usage() {
 cat <<"USAGE"
 Usage: create-project [OPTIONS] <name>
-
+	-v, --vhost       Create a vhost for project
+	-c, --clone       Clone a git repository from url
 	-h, --help        Show this help screen
 	-u, --url         Specify a local address, default is http://name.it
 	-r, --remove      Remove a Virtual Host
 	--list            List the current virtual host
+
 
 Examples:
 
@@ -48,6 +50,40 @@ project-remove() {
 	exit 0
 }
 
+# Clone a project from a git repository
+clone-project() {
+	echo "cloning project...: "$url
+	git clone $url $repo
+	exit 0
+}
+
+# Create a vhost
+create-vhost() {
+	echo "create vhost for project...: "$url
+
+	echo -e "\nCreating the new $name Virtual Host with DocumentRoot: $root"
+
+	cp /etc/apache2/sites-available/template /etc/apache2/sites-available/$name.conf
+	sed -i 's/template.email/'$email'/g' /etc/apache2/sites-available/$name.conf
+	sed -i 's/template.url/'$url'/g' /etc/apache2/sites-available/$name.conf
+	sed -i 's#template.docroot#'$root'#g' /etc/apache2/sites-available/$name.conf
+	sed -i 's#template.error#'$log_error'#g' /etc/apache2/sites-available/$name.conf
+
+	echo "Adding $url to the /etc/hosts file..."
+
+	# http://blog.jonathanargentiero.com/docker-sed-cannot-rename-etcsedl8ysxl-device-or-resource-busy/
+	cp /etc/hosts ~/hosts.new
+	sed -i '1s/^/127.0.0.1       '$url'\n/' ~/hosts.new
+	cp -f ~/hosts.new /etc/hosts
+
+	a2ensite $name
+	service apache2 restart
+
+	echo -e "\nYou can now browse to your Virtual Host at http://$url"
+
+	exit 0
+}
+
 # List the available and enabled virtual hosts.
 project-list() {
 	echo "Available virtual hosts:"
@@ -59,6 +95,7 @@ project-list() {
 
 # Define and create default values.
 name="${!#}"
+repo="/var/www/projects/$3"
 email="webmaster@localhost"
 url="$name.it"
 docroot="/var/www/projects/$name"
@@ -66,6 +103,12 @@ docroot="/var/www/projects/$name"
 # Loop to read options and arguments.
 while [ $1 ]; do
 	case "$1" in
+		'--vhost'|'-v')
+			url="$2"
+			create-vhost;;
+		'--clone'|'-c')
+			url="$2"
+			clone-project;;
 		'--list')
 			project-list;;
 		'--help'|'-h')
@@ -75,6 +118,7 @@ while [ $1 ]; do
 			project-remove;;
 		'--url'|'-u')
 			url="$2"
+
 	esac
 	shift
 done

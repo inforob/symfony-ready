@@ -7,7 +7,7 @@ services:
         user: 'application'
       context: webserver
       dockerfile: Dockerfile
-    container_name: webserver_cas
+    container_name: webserver_lts
     volumes:
       - ./www/:/var/www/projects/
     environment:
@@ -22,9 +22,9 @@ services:
       - "9001:9001"
     networks:
       network:
-        ipv4_address: 173.16.4.1
+        ipv4_address: 174.16.4.1
   database:
-    container_name: database_cas
+    container_name: database
     image: mysql:8.0
     tty: true
     volumes:
@@ -37,10 +37,10 @@ services:
         MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
     networks:
       network:
-        ipv4_address: 173.16.4.2
+        ipv4_address: 174.16.4.2
 networks:
   network:
     driver: bridge
     ipam:
       config:
-        - subnet: 173.16.4.0/16
+        - subnet: 174.16.4.0/16

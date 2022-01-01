@@ -1,7 +1,7 @@
 #!/bin/bash
 
 add_host() {
-  sudo sed -i '1s/^/173.16.4.1       '${APP}'\n/' /etc/hosts
+  sudo sed -i '1s/^/174.16.4.1       '${APP}'\n/' /etc/hosts
 }
 
 remove_host(){

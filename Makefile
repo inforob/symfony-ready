@@ -10,6 +10,11 @@ install:
 remove:
 	@docker-compose exec ${DOCKER_BE} bash -c "/opt/script.sh --remove ${APP}"
 	./webserver/shell/localhost.sh remove_host ${APP}
+clone:
+	@docker-compose exec ${DOCKER_BE} bash -c "/opt/script.sh --clone ${REPOSITORY} ${APP}"
+vhost:
+	@docker-compose exec ${DOCKER_BE} bash -c "/opt/script.sh --vhost ${APP}"
+	./webserver/shell/localhost.sh add_host ${APP}	
 run:
 	@docker-compose up -d
 stop:
