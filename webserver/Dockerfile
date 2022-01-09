@@ -23,9 +23,9 @@ RUN wget https://cs.symfony.com/download/php-cs-fixer-v3.phar -O php-cs-fixer
 RUN chmod a+x php-cs-fixer
 RUN mv php-cs-fixer /usr/local/bin/php-cs-fixer
 
-# Symfony installer
-RUN wget wget https://get.symfony.com/cli/installer -O - | bash
-RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
+# Symfony CLI
+RUN printf "deb [trusted=yes] https://repo.symfony.com/apt/ /" > /etc/apt/sources.list.d/symfony-cli.list
+RUN apt update && apt install symfony-cli
 
 COPY shell/localhost.sh /opt/localhost.sh
 COPY shell/script.sh /opt/script.sh

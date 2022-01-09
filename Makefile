@@ -1,6 +1,8 @@
 DOCKER_BE = webserver
 USER_APP = application
 
+ssh-root:
+	@docker-compose exec ${DOCKER_BE} bash
 ssh:
 	@docker-compose exec ${DOCKER_BE} bash -c "su application"
 install:
