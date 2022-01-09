@@ -14,8 +14,6 @@ services:
       PHP_DATE_TIMEZONE: 'Europe/Madrid'
       XDEBUG_MODE : 'develop,debug,coverage'
       XDEBUG_START_WITH_REQUEST : 'yes'
-    depends_on:
-      - database
     ports:
       - "80:80"
       - "443:443"
@@ -25,16 +23,15 @@ services:
         ipv4_address: 174.16.4.1
   database:
     container_name: database
-    image: mysql:8.0
-    tty: true
+    image: bitnami/postgresql
     volumes:
-      - "./.mysql-data/db:/var/lib/mysql"
+      - "./tmp/postgresql:/data"
     ports:
-      - "33306:3306"
+      - "5432:5432"
     environment:
-        MYSQL_ROOT_PASSWORD: 'root'
-        MYSQL_DATABASE: 'symfony_db'
-        MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      POSTGRESQL_USERNAME: 'root'
+      POSTGRESQL_PASSWORD: 'root'
+      POSTGRESQL_DATABASE: 'symfony_fast'
     networks:
       network:
         ipv4_address: 174.16.4.2
