@@ -1,6 +1,9 @@
 DOCKER_BE = webserver
+DOCKER_DATABASE = database
 USER_APP = application
 
+ssh-database:
+	@docker-compose exec ${DOCKER_DATABASE} bash
 ssh-root:
 	@docker-compose exec ${DOCKER_BE} bash
 ssh:

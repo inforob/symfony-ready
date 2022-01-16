@@ -59,6 +59,8 @@ clone-project() {
 
 # Create a vhost
 create-vhost() {
+  root="$docroot/public"
+  log_error="$docroot/var/log/apache_error.log"
 	echo "create vhost for project...: "$url
 
 	echo -e "\nCreating the new $name Virtual Host with DocumentRoot: $root"

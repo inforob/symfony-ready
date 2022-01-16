@@ -3,7 +3,6 @@
 
     ServerName template.url
     ServerAlias template.url
-    DocumentRoot template.docroot
 
     DocumentRoot template.docroot
     <Directory template.docroot/>
