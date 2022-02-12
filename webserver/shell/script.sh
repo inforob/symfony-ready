@@ -101,6 +101,7 @@ repo="/var/www/projects/$3"
 email="webmaster@localhost"
 url="$name.it"
 docroot="/var/www/projects/$name"
+chmod +rwx docroot
 
 # Loop to read options and arguments.
 while [ $1 ]; do
