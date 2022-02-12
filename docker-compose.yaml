@@ -29,6 +29,7 @@ services:
     tty: true
     volumes:
       - "./.mysql-data/db:/var/lib/mysql"
+      - "./webserver/databases:/opt/databases"
     ports:
       - "33306:3306"
     environment:
