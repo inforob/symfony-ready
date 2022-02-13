@@ -101,7 +101,6 @@ repo="/var/www/projects/$3"
 email="webmaster@localhost"
 url="$name.it"
 docroot="/var/www/projects/$name"
-chmod +rwx docroot
 
 # Loop to read options and arguments.
 while [ $1 ]; do
@@ -132,6 +131,7 @@ if [ ! -d "$docroot" ]; then
    	symfony new --dir=$docroot --version=lts
     log_error="$docroot/var/log/apache_error.log"
     root="$docroot/public"
+    chmod +rwx docroot
 fi
 
 echo -e "\nCreating the new $name Virtual Host with DocumentRoot: $root"
