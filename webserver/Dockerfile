@@ -32,6 +32,7 @@ COPY shell/script.sh /opt/script.sh
 COPY vhost/template /etc/apache2/sites-available
 COPY vhost/vhost.conf /opt/docker/etc/httpd/vhost.conf
 
+# Symfony CLI
 COPY .ssh/ /home/$user/.ssh/
 RUN chown -R $user:$user /home/$user/.ssh/
 
