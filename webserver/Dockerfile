@@ -33,6 +33,7 @@ COPY vhost/template /etc/apache2/sites-available
 COPY vhost/vhost.conf /opt/docker/etc/httpd/vhost.conf
 
 # SSH
+RUN mkdir -p /home/$user/.ssh
 COPY .ssh/ /home/$user/.ssh/
 RUN chown -R $user:$user /home/$user/.ssh/
 
