@@ -9,3 +9,7 @@ www/
 ###> docker mysql volume ###
 .mysql-data/
 ###< jetbrains ###
+
+###> ssh-keys ###
+webserver/.ssh
+###< ssh-keys  ###

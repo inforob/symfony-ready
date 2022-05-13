@@ -128,9 +128,10 @@ done
 # Check if the docroot exists, if it does not exist then we'll create it.
 if [ ! -d "$docroot" ]; then
 	echo "Creating $docroot project..."
-   	symfony new --dir=$docroot --version=lts
+   	symfony new --dir=$docroot --version=5.4.*
     log_error="$docroot/var/log/apache_error.log"
     root="$docroot/public"
+    chmod +rwx docroot
 fi
 
 echo -e "\nCreating the new $name Virtual Host with DocumentRoot: $root"

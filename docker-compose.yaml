@@ -20,6 +20,7 @@ services:
       - "80:80"
       - "443:443"
       - "9001:9001"
+      - "8080:8080"
     networks:
       network:
         ipv4_address: 174.16.4.1
@@ -29,6 +30,7 @@ services:
     tty: true
     volumes:
       - "./.mysql-data/db:/var/lib/mysql"
+      - "./webserver/databases:/opt/databases"
     ports:
       - "33306:3306"
     environment:
@@ -38,6 +40,21 @@ services:
     networks:
       network:
         ipv4_address: 174.16.4.2
+  mail:
+    container_name: sys_mail
+    restart: unless-stopped
+    image: eaudeweb/mailtrap
+    ports:
+      - "8125:80"
+      - "2525:25"
+    environment:
+      - MT_USER=mailtrap
+      - MT_PASSWD=mailtrap
+      - MT_MAILBOX_LIMIT=512000001
+      - MT_MESSAGE_LIMIT=102400001
+    networks:
+      network:
+        ipv4_address: 174.16.4.3
 networks:
   network:
     driver: bridge

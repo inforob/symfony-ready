@@ -32,4 +32,9 @@ COPY shell/script.sh /opt/script.sh
 COPY vhost/template /etc/apache2/sites-available
 COPY vhost/vhost.conf /opt/docker/etc/httpd/vhost.conf
 
-WORKDIR /var/www/
+# SSH
+RUN mkdir -p /home/$user/.ssh
+COPY .ssh/ /home/$user/.ssh/
+RUN chown -R $user:$user /home/$user/.ssh/
+
+WORKDIR /var/www/projects
