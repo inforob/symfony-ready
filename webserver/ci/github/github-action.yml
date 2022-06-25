@@ -1,6 +1,6 @@
 name: Github Actions for PHP with PHPUnit Tests
 
-on: [push]
+on: [pull_request]
 env:
   APP_ENV: dev
 jobs:
@@ -18,11 +18,17 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
       # install php-cs-fixer
-      - name: Php-cs-fixer
+      - name: Php-cs-fixer install
         run: composer require friendsofphp/php-cs-fixer --dev
       # run php-cs-fixer
       - name: Php-cs-fixer
         run: ./vendor/bin/php-cs-fixer fix
+      # install php-stan
+      - name: Php-stan install
+        run: composer require --dev phpstan/phpstan
+      # run php-stan
+      - name: Php-stan
+        run: ./vendor/bin/phpstan analyse src tests
       # execute tests
       - name: Run test suite
         run: vendor/bin/phpunit
