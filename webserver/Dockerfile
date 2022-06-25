@@ -22,6 +22,7 @@ RUN apt update && apt install
 RUN wget https://cs.symfony.com/download/php-cs-fixer-v3.phar -O php-cs-fixer
 RUN chmod a+x php-cs-fixer
 RUN mv php-cs-fixer /usr/local/bin/php-cs-fixer
+RUN php-cs-fixer self-update
 
 # Symfony CLI
 RUN printf "deb [trusted=yes] https://repo.symfony.com/apt/ /" > /etc/apt/sources.list.d/symfony-cli.list
@@ -36,5 +37,6 @@ COPY vhost/vhost.conf /opt/docker/etc/httpd/vhost.conf
 RUN mkdir -p /home/$user/.ssh
 COPY .ssh/ /home/$user/.ssh/
 RUN chown -R $user:$user /home/$user/.ssh/
+RUN echo "    IdentityFile ~/.ssh/desktop" >> /etc/ssh/ssh_config
 
 WORKDIR /var/www/projects
