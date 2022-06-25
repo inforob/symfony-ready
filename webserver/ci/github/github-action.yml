@@ -1,0 +1,28 @@
+name: Github Actions for PHP with PHPUnit Tests
+
+on: [push]
+env:
+  APP_ENV: dev
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # validate composer.json
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+      # install dependencies
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+      # install php-cs-fixer
+      - name: Php-cs-fixer
+        run: composer require friendsofphp/php-cs-fixer --dev
+      # run php-cs-fixer
+      - name: Php-cs-fixer
+        run: ./vendor/bin/php-cs-fixer fix
+      # execute tests
+      - name: Run test suite
+        run: vendor/bin/phpunit

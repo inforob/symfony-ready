@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# path to php-stan 
+PHP_STAN_DIR="/var/www/projects/{PROJECT_DIR}/vendor/bin/phpstan"
+
+if [ -f "$PHP_STAN_DIR" ]; then
+     # command leven for php-stan 
+     $PHP_STAN_DIR analyse src tests --level=5 
+     if [ $? -eq 0 ]; then 
+      exit 0 ;
+    fi
+else
+    # if not installed php-stan
+    echo "php-stan not is installed https://github.com/phpstan/phpstan" ;
+fi
+
+exit 1;
