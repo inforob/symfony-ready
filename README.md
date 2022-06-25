@@ -22,4 +22,8 @@ service dovecot restart
 COPY .ssh/id_ed25519.pub /home/$user/.ssh/
 COPY .ssh/id_ed25519 /home/$user/.ssh/
 RUN chown -R $user:$user /home/$user/.ssh/
+
+Turns out when using Ubuntu, the ssh_config isn't correct. You need to add 
+RUN  echo "    IdentityFile ~/.ssh/id_rsa" >> /etc/ssh/ssh_config
+to your Dockerfile in order to get it to recognize your ssh key.
 ```
