@@ -1,4 +1,4 @@
-FROM webdevops/php-apache-dev:7.4
+FROM webdevops/php-apache-dev:8.1
 
 ARG email
 ARG user
