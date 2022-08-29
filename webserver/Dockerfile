@@ -18,6 +18,12 @@ RUN git config --global user.name $user
 # Install packages and PHP extensions
 RUN apt update && apt install
 
+# Install Tidy
+RUN apt-get update \
+    && apt-get install -y libtidy-dev \
+    && docker-php-ext-install tidy \
+    && docker-php-ext-enable tidy
+
 # Php-cs-fixer
 RUN wget https://cs.symfony.com/download/php-cs-fixer-v3.phar -O php-cs-fixer
 RUN chmod a+x php-cs-fixer
