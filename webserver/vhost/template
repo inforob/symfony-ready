@@ -3,7 +3,7 @@
 
     ServerName template.url
     ServerAlias template.url
-    ProxyPass /wss/ ws://127.0.0.1:9001/
+    # ProxyPass /wss/ ws://127.0.0.1:9001/
 
     DocumentRoot template.docroot
     <Directory template.docroot/>

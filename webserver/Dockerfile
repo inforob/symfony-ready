@@ -45,4 +45,15 @@ COPY .ssh/ /home/$user/.ssh/
 RUN chown -R $user:$user /home/$user/.ssh/
 RUN echo "    IdentityFile ~/.ssh/desktop" >> /etc/ssh/ssh_config
 
+# SSL
+RUN a2enmod ssl && a2enmod rewrite
+RUN mkdir -p /etc/apache2/ssl/certs/
+COPY ./ssl/certs/selfsigned.crt /etc/apache2/ssl/certs/selfsigned.crt
+
+RUN mkdir -p /etc/apache2/ssl/private/
+COPY ./ssl/private/selfsigned.key /etc/apache2/ssl/private/selfsigned.key
+
+COPY vhost/vhost-ssl.conf /etc/apache2/sites-available
+
+
 WORKDIR /var/www/projects

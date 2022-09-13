@@ -13,3 +13,7 @@ www/
 ###> ssh-keys ###
 webserver/.ssh
 ###< ssh-keys  ###
+
+###> ssl-certs ###
+webserver/ssl
+###< ssl-certs   ###
