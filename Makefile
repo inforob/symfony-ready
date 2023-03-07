@@ -1,7 +1,10 @@
 DOCKER_BE = webserver
 DOCKER_DATABASE = database
 USER_APP = application
+MAIL_APP = mail
 
+mail:
+	@docker-compose exec ${MAIL_APP} bash -c "su root"
 ssh-database:
 	@docker-compose exec ${DOCKER_DATABASE} bash
 ssh-root:
