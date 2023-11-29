@@ -128,7 +128,7 @@ done
 # Check if the docroot exists, if it does not exist then we'll create it.
 if [ ! -d "$docroot" ]; then
 	echo "Creating $docroot project..."
-   	symfony new --dir=$docroot --version=6.3.*
+   	symfony new --dir=$docroot --version=6.4.*
     log_error="$docroot/var/log/apache_error.log"
     root="$docroot/public"
     chmod +rwx docroot
